@@ -1,0 +1,8 @@
+# Adding emoji in your python script
+# import emojis using "pip install emojis"
+import emojis
+print(emojis.encode(":sunny:"))
+print(emojis.encode(":boat:"))
+print(emojis.encode(":heart:"))
+print(emojis.encode(":star:"))
+print(emojis.encode(":smile:"))
