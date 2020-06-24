@@ -1,0 +1,12 @@
+# calculator using eval() function in python
+
+ print(eval("9+8"))
+ print(eval("18-6"))
+ print(eval("4*6"))
+ print(eval("25/2"))
+ print(eval("9+8-5*2/3"))
+
+# By user input
+
+while True:
+    print(eval(input("Calculate:- ")))
