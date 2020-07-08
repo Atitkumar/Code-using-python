@@ -1,0 +1,10 @@
+# Check internet Speed using Python
+# pip install speedtest-cli
+from speedtest import Speedtest
+
+st = Speedtest()
+print("Download:",st.download()/1024,"kb/s")
+print("upload:",st.upload())
+
+st.get_servers()
+print("ping:",st.results.ping)
