@@ -1,0 +1,8 @@
+# ScreenShot using python
+# pip install pyautogui
+
+import pyautogui
+
+screenshot = pyautogui.screenshot()
+#copy your path to save the image
+screenshot.save(r"your folder path\screenshotName.png")
