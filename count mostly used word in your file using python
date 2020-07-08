@@ -1,0 +1,21 @@
+# Which word is more in your file, count using python
+#Create one file via .txt and save it same folder where is your .py file
+
+name = input("Enter File Name:= ")
+# example file.txt
+
+handle = open(name)
+
+counts = dict()
+for line in handle:
+    words = line.split()
+    for word in words:
+        counts[word] = counts.get(word,0) + 1
+
+NumberOfTimes = None
+WordName = None
+for word,count in counts.items():
+    if NumberOfTimes is None or count > NumberOfTimes:
+        WordName = word
+        NumberOfTimes = count
+6=print(WordName, NumberOfTimes)
