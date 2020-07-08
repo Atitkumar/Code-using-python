@@ -1,0 +1,8 @@
+# Progress bar using Python
+# pip install tqdm
+
+from tqdm import tqdm
+from time import sleep
+
+for i in tqdm(range(15)):
+    sleep(0.5)
