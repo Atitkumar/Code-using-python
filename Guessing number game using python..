@@ -1,0 +1,23 @@
+# Guessing number using python
+
+import random
+
+number = random.randint(1, 25)
+chances =0
+
+print("Guess a number between 1 and 25:- ")
+
+while chances < 5:
+    guess = int(input("Enter your Guess:- "))
+
+    if guess == number:
+        print("Congratulation YOU WON!..")
+        exit()
+    elif guess < number:
+        print("Your guess is too low")
+    else:
+        print("Your guess is to high")
+    chances +=1
+    print("Chance left: ",5-chances)
+
+print("You LOSE!!! The number is:- ",number)
