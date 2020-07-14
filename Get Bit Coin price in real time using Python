@@ -1,0 +1,25 @@
+# Get Bit coin current price using python
+# pip install beautifulsoup4
+# pip install requests
+from bs4 import BeautifulSoup as bs
+import requests
+# method to get price of bit coin
+def get_price(url):
+    # Getting the request from url
+    data = requests.get(url)
+
+    # Converting to the text
+    soup = bs(data.text, 'html.parser')
+
+    #finding info for current price
+    update = soup.find("div", class_="BNeawe iBp4i AP7Wnd").text
+
+    #returning the price
+    return update
+
+# url of the bit coin price
+url = "https://www.google.com/search?q=bitcoin+price"
+
+update = get_price(url)
+
+print(update)
