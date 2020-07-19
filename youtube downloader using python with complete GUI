@@ -1,0 +1,105 @@
+from pytube import * #pip install pytube3
+from tkinter import * # To show GUI
+from tkinter.filedialog import * # To show Dialogbox
+from tkinter.messagebox import * # Msg box pop
+from  threading import * # For thread fucntion
+
+#total size container
+file_size = 0.0
+
+# to show downloading percentages
+# def progress(stream=0,chunk=None,file_handle=None,remaing=0.0):
+#     # Get the percentage of file that has been downloaded..
+#     file_Downloaded = file_size-remaing
+#     per = (file_Downloaded/file_size)*100
+#     dbtn.config(text="{:00.0f} % downloaded".format(per))
+
+# Get URL of video by User
+def StartDownload():
+    global file_size
+
+    # to catch error
+    try:
+        # url input by user
+        url = urlField.get()
+        print(url)
+        #changing button text after push start Download
+        dbtn.config(text='Please wait...')
+        # disable after done donwload
+        dbtn.config(state=DISABLED)
+
+        path_to_save_video = askdirectory() # ask user for path
+        print(path_to_save_video)
+        if path_to_save_video is None:
+            return
+        ob = YouTube(url)#,on_progress_callback=progress)
+
+        #strm = ob.streams.first() helps to download video in highest resolution (720p/1080p)
+        #strm = ob.streams.second()helps to download video in second highest resolution (480p/720p)
+        strm = ob.streams.first()
+        file_size=strm.filesize
+
+        #Title of Video
+        vTitle.config(text=strm.title)
+        vTitle.pack(side=TOP)
+
+        print(file_size)
+        strm.download(path_to_save_video)
+        print("Done")
+        # changing button text after Download complete
+        dbtn.config(text='Start Download')
+        # enable button
+        dbtn.config(state='normal')
+        # Msg box pop-up after download completed
+        showinfo("Download Finished","Downloaded successfully ")
+        # delete the url after download
+        urlField.delete(0,END)
+        vTitle.pack_forget()
+    except Exception as e:
+        print(e)
+        print("Something went wrong")
+
+# creating thread
+def Multithread():
+    thread = Thread(target=StartDownload())
+    thread.start()
+
+# Start GUI building
+main = Tk() # main window
+main.title('YouTube Downloder') # Title for your gui
+
+# Download png/jpg image for logo and icon. Convert .jpg/.png to .ico
+# make sure your png and ico image is in same folder where your .py file is.
+
+# set the icon
+main.iconbitmap('yourImage.ico')
+
+# Width and height of Gui
+main.geometry("400x500")
+
+# Heading image
+file = PhotoImage(file='yourImage.png')
+headingIcon = Label(main,image = file)
+headingIcon.pack(side=TOP)
+
+# text field for url input
+urlField = Entry(main, font = ('Calibri' ,25),justify=CENTER)# Font family, font size, curcer point
+urlField.pack(side=TOP)
+
+# Download Button
+dbtn = Button(main,text="Start Download",font = ('Algerian' ,20),relief='sunken',command=Multithread)
+dbtn.pack(side=TOP,pady='15')
+'''Algerian - font family
+   20 -  font size 
+   relief is for button border('flat, groove, raised, ridge, solid, or sunken)
+   command - to call Multitgread fuction
+   you can call StartDownload fuction directly too. and comment def Multithread
+'''
+
+
+vTitle = Label(main,text='Video Title...')
+
+
+# to show your gui
+main.mainloop()
+
