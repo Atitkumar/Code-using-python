@@ -1,0 +1,6 @@
+# Search anything from Wikipidea
+# pip install wikipedia in terminal
+import wikipedia
+
+query = wikipedia.page("python language")
+print(query.summary)
